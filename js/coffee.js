@@ -1,5 +1,6 @@
 function iniciarSimulador() {
   const nombre = prompt("¡Bienvenido! ¿Cuál es tu nombre?");
+  if (!nombre) return;
   alert(`Hola ${nombre}, Bienvenido a Moka Coffee.`);
   procesarPedido();
   finalizarCompra(nombre);
