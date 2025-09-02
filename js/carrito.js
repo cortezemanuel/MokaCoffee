@@ -11,7 +11,7 @@ function renderCarrito() {
       item.precio * item.cantidad
     }`;
     const btnQuitar = document.createElement("button");
-    btnQuitar.textContent = "❌";
+    btnQuitar.textContent = "X";
     btnQuitar.addEventListener("click", () => quitarDelCarrito(item.id));
     li.appendChild(btnQuitar);
     lista.appendChild(li);

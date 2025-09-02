@@ -18,7 +18,7 @@ btnIniciar.addEventListener("click", () => {
     return;
   }
   const saludo = document.createElement("h2");
-  saludo.textContent = `Hola ${nombre}, bienvenido a Moka Coffee ☕`;
+  saludo.textContent = `Hola ${nombre}, Bienvenido a Moka Coffee`;
   document.body.insertBefore(saludo, menuDiv);
   mostrarMenu();
 });
@@ -41,4 +41,9 @@ function agregarAlCarrito(cafe) {
     carrito.push({ ...cafe, cantidad: 1 });
   }
   localStorage.setItem("carrito", JSON.stringify(carrito));
+
+  const aviso = document.createElement("p");
+  aviso.textContent = `${cafe.nombre} agregado al carrito`;
+  menuDiv.appendChild(aviso);
+  setTimeout(() => aviso.remove(), 1500);
 }
