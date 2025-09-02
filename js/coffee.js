@@ -14,11 +14,20 @@ const btnIniciar = document.getElementById("btnIniciar");
 btnIniciar.addEventListener("click", () => {
   const nombre = document.getElementById("nombreInput").value.trim();
   if (nombre.length < 2 || !isNaN(nombre)) {
-    alert("Por favor ingresá un nombre válido.");
+    Toastify({
+      text: "Por favor ingresá un nombre válido",
+      duration: 2000,
+      gravity: "top",
+      position: "center",
+      style: {
+        background: "linear-gradient(to right, #d32f2f, #b71c1c)",
+        borderRadius: "8px",
+      },
+    }).showToast();
     return;
   }
   const saludo = document.createElement("h2");
-  saludo.textContent = `Hola ${nombre}, Bienvenido a Moka Coffee`;
+  saludo.textContent = `Hola ${nombre}, bienvenido a Moka Coffee`;
   document.body.insertBefore(saludo, menuDiv);
   mostrarMenu();
 });
@@ -42,8 +51,14 @@ function agregarAlCarrito(cafe) {
   }
   localStorage.setItem("carrito", JSON.stringify(carrito));
 
-  const aviso = document.createElement("p");
-  aviso.textContent = `${cafe.nombre} agregado al carrito`;
-  menuDiv.appendChild(aviso);
-  setTimeout(() => aviso.remove(), 1500);
+  Toastify({
+    text: `${cafe.nombre} agregado al carrito`,
+    duration: 2000,
+    gravity: "bottom",
+    position: "right",
+    style: {
+      background: "linear-gradient(to right, #6d4c41, #4e342e)",
+      borderRadius: "8px",
+    },
+  }).showToast();
 }

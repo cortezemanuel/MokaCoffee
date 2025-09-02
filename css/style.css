@@ -39,23 +39,35 @@ button {
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(109, 76, 65, 0.4);
-  transition: background-color 0.3s ease;
-}
-
-input {
-  background-color: #white;
-  color: black;
-  border: none;
-  padding: 12px 24px;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(109, 76, 65, 0.4);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: #4e342e;
+  transform: scale(1.05);
+}
+
+input {
+  background-color: #fff;
+  color: #3e2723;
+  border: 2px solid #6d4c41;
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  margin-right: 10px;
+  box-shadow: 0 2px 6px rgba(109, 76, 65, 0.2);
+}
+
+#menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+#listaCarrito li {
+  margin: 8px 0;
+  font-size: 1.1rem;
 }
 
 @media (max-width: 600px) {
@@ -68,8 +80,9 @@ button:hover {
     max-width: 90%;
   }
 
-  button {
+  button,
+  input {
     width: 100%;
-    padding: 15px 0;
+    margin: 5px 0;
   }
 }
