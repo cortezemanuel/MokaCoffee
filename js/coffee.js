@@ -9,15 +9,19 @@ const cafes = [
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const menuDiv = document.getElementById("menu");
+const btnIniciar = document.getElementById("btnIniciar");
 
-function iniciarSimulador() {
-  const nombre = prompt("¡Bienvenido! ¿Cuál es tu nombre?");
-  if (!nombre) return;
+btnIniciar.addEventListener("click", () => {
+  const nombre = document.getElementById("nombreInput").value.trim();
+  if (nombre.length < 2 || !isNaN(nombre)) {
+    alert("Por favor ingresá un nombre válido.");
+    return;
+  }
   const saludo = document.createElement("h2");
   saludo.textContent = `Hola ${nombre}, bienvenido a Moka Coffee ☕`;
   document.body.insertBefore(saludo, menuDiv);
   mostrarMenu();
-}
+});
 
 function mostrarMenu() {
   menuDiv.innerHTML = "<h2>Elige tu café:</h2>";
@@ -30,7 +34,11 @@ function mostrarMenu() {
 }
 
 function agregarAlCarrito(cafe) {
-  carrito.push(cafe);
+  let item = carrito.find((p) => p.id === cafe.id);
+  if (item) {
+    item.cantidad++;
+  } else {
+    carrito.push({ ...cafe, cantidad: 1 });
+  }
   localStorage.setItem("carrito", JSON.stringify(carrito));
-  alert(`${cafe.nombre} agregado al carrito`);
 }
