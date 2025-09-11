@@ -58,6 +58,64 @@ input {
   box-shadow: 0 2px 6px rgba(109, 76, 65, 0.2);
 }
 
+.cafe-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #6d4c41;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 10px;
+  width: 180px;
+  box-shadow: 0 4px 8px rgba(109, 76, 65, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.cafe-card:hover {
+  transform: scale(1.05);
+}
+
+.cafe-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.cafe-card p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.cafe-card button {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filters input,
+.filters select {
+  padding: 8px 12px;
+  border: 2px solid #6d4c41;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+  border-color: #4e342e;
+  box-shadow: 0 0 5px rgba(78, 52, 46, 0.5);
+}
+
 #menu {
   display: flex;
   flex-direction: column;

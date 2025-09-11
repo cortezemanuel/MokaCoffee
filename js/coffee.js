@@ -1,11 +1,10 @@
-const cafes = [
-  { id: 1, nombre: "Espresso", precio: 3000 },
-  { id: 2, nombre: "Latte", precio: 4000 },
-  { id: 3, nombre: "Capuccino", precio: 4500 },
-  { id: 4, nombre: "Chocolate", precio: 4700 },
-  { id: 5, nombre: "Flat White", precio: 5000 },
-  { id: 6, nombre: "Cafe del día", precio: 2500 },
-];
+let cafes = [];
+
+fetch("../data/cafes.json")
+  .then((res) => res.json())
+  .then((data) => {
+    cafes = data;
+  });
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const menuDiv = document.getElementById("menu");
@@ -26,19 +25,65 @@ btnIniciar.addEventListener("click", () => {
     }).showToast();
     return;
   }
+
   const saludo = document.createElement("h2");
   saludo.textContent = `Hola ${nombre}, bienvenido a Moka Coffee`;
   document.body.insertBefore(saludo, menuDiv);
-  mostrarMenu();
+
+  const filtrosDiv = document.createElement("div");
+  filtrosDiv.className = "filters";
+  filtrosDiv.innerHTML = `
+    <input type="text" id="busqueda" placeholder="Buscar café..." />
+    <select id="categoria">
+      <option value="">Todas las categorías</option>
+      <option value="espresso">Espresso</option>
+      <option value="latte">Latte</option>
+      <option value="capuccino">Capuccino</option>
+      <option value="otros">Otros</option>
+    </select>
+    <select id="orden">
+      <option value="">Ordenar</option>
+      <option value="precio-asc">Precio: Menor a Mayor</option>
+      <option value="precio-desc">Precio: Mayor a Menor</option>
+    </select>
+  `;
+  menuDiv.parentNode.insertBefore(filtrosDiv, menuDiv);
+
+  const busquedaInput = document.getElementById("busqueda");
+  const categoriaSelect = document.getElementById("categoria");
+  const ordenSelect = document.getElementById("orden");
+  busquedaInput.addEventListener("input", filtrar);
+  categoriaSelect.addEventListener("change", filtrar);
+  ordenSelect.addEventListener("change", filtrar);
+
+  mostrarMenu(cafes);
 });
 
-function mostrarMenu() {
+function mostrarMenu(lista) {
   menuDiv.innerHTML = "<h2>Elige tu café:</h2>";
-  cafes.forEach((cafe) => {
+  lista.forEach((cafe) => {
+    const card = document.createElement("div");
+    card.className = "cafe-card";
+
+    const img = document.createElement("img");
+    img.src = cafe.imagen;
+    img.alt = cafe.nombre;
+
+    const nombre = document.createElement("p");
+    nombre.textContent = cafe.nombre;
+
+    const precio = document.createElement("p");
+    precio.textContent = `$${cafe.precio}`;
+
     const btn = document.createElement("button");
-    btn.textContent = `${cafe.nombre} - $${cafe.precio}`;
+    btn.textContent = "Agregar al carrito";
     btn.addEventListener("click", () => agregarAlCarrito(cafe));
-    menuDiv.appendChild(btn);
+
+    card.appendChild(img);
+    card.appendChild(nombre);
+    card.appendChild(precio);
+    card.appendChild(btn);
+    menuDiv.appendChild(card);
   });
 }
 
@@ -50,7 +95,6 @@ function agregarAlCarrito(cafe) {
     carrito.push({ ...cafe, cantidad: 1 });
   }
   localStorage.setItem("carrito", JSON.stringify(carrito));
-
   Toastify({
     text: `${cafe.nombre} agregado al carrito`,
     duration: 2000,
@@ -61,4 +105,21 @@ function agregarAlCarrito(cafe) {
       borderRadius: "8px",
     },
   }).showToast();
+}
+
+function filtrar() {
+  let listaFiltrada = [...cafes];
+  const texto = document.getElementById("busqueda").value.toLowerCase();
+  const categoria = document.getElementById("categoria").value;
+  const orden = document.getElementById("orden").value;
+  if (texto)
+    listaFiltrada = listaFiltrada.filter((c) =>
+      c.nombre.toLowerCase().includes(texto)
+    );
+  if (categoria)
+    listaFiltrada = listaFiltrada.filter((c) => c.categoria === categoria);
+  if (orden === "precio-asc") listaFiltrada.sort((a, b) => a.precio - b.precio);
+  if (orden === "precio-desc")
+    listaFiltrada.sort((a, b) => b.precio - a.precio);
+  mostrarMenu(listaFiltrada);
 }

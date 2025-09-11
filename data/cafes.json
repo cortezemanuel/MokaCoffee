@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "nombre": "Espresso",
+    "precio": 3000,
+    "imagen": "images/espresso.jpg"
+  },
+  { "id": 2, "nombre": "Latte", "precio": 4000, "imagen": "images/latte.jpg" },
+  {
+    "id": 3,
+    "nombre": "Capuccino",
+    "precio": 4500,
+    "imagen": "images/capuccino.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Chocolate",
+    "precio": 4700,
+    "imagen": "images/chocolate.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Flat White",
+    "precio": 5000,
+    "imagen": "images/flatwhite.jpg"
+  },
+  {
+    "id": 6,
+    "nombre": "Cafe del día",
+    "precio": 2500,
+    "imagen": "images/cafedia.jpg"
+  }
+]

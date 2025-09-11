@@ -30,7 +30,6 @@ function quitarDelCarrito(id) {
     }
     localStorage.setItem("carrito", JSON.stringify(carrito));
     renderCarrito();
-
     Toastify({
       text: "Producto eliminado del carrito X",
       duration: 2000,
@@ -48,7 +47,6 @@ document.getElementById("vaciar").addEventListener("click", () => {
   carrito = [];
   localStorage.setItem("carrito", JSON.stringify(carrito));
   renderCarrito();
-
   Toastify({
     text: "Carrito vaciado",
     duration: 2000,
@@ -72,7 +70,6 @@ document.getElementById("finalizar").addEventListener("click", () => {
       borderRadius: "8px",
     },
   }).showToast();
-
   carrito = [];
   localStorage.setItem("carrito", JSON.stringify(carrito));
   renderCarrito();
