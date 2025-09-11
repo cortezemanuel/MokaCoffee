@@ -3,31 +3,42 @@
     "id": 1,
     "nombre": "Espresso",
     "precio": 3000,
+    "categoria": "espresso",
     "imagen": "images/espresso.jpg"
   },
-  { "id": 2, "nombre": "Latte", "precio": 4000, "imagen": "images/latte.jpg" },
+  {
+    "id": 2,
+    "nombre": "Latte",
+    "precio": 4000,
+    "categoria": "latte",
+    "imagen": "images/latte.jpg"
+  },
   {
     "id": 3,
     "nombre": "Capuccino",
     "precio": 4500,
+    "categoria": "capuccino",
     "imagen": "images/capuccino.jpg"
   },
   {
     "id": 4,
     "nombre": "Chocolate",
     "precio": 4700,
+    "categoria": "otros",
     "imagen": "images/chocolate.jpg"
   },
   {
     "id": 5,
     "nombre": "Flat White",
     "precio": 5000,
+    "categoria": "otros",
     "imagen": "images/flatwhite.jpg"
   },
   {
     "id": 6,
     "nombre": "Cafe del día",
     "precio": 2500,
+    "categoria": "otros",
     "imagen": "images/cafedia.jpg"
   }
 ]
