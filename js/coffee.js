@@ -1,14 +1,14 @@
 let cafes = [];
-
-fetch("../data/cafes.json")
-  .then((res) => res.json())
-  .then((data) => {
-    cafes = data;
-  });
-
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const menuDiv = document.getElementById("menu");
 const btnIniciar = document.getElementById("btnIniciar");
+
+fetch("data/cafes.json")
+  .then((res) => res.json())
+  .then((data) => {
+    cafes = data;
+  })
+  .catch((err) => console.error("Error cargando cafés:", err));
 
 btnIniciar.addEventListener("click", () => {
   const nombre = document.getElementById("nombreInput").value.trim();
@@ -89,11 +89,8 @@ function mostrarMenu(lista) {
 
 function agregarAlCarrito(cafe) {
   let item = carrito.find((p) => p.id === cafe.id);
-  if (item) {
-    item.cantidad++;
-  } else {
-    carrito.push({ ...cafe, cantidad: 1 });
-  }
+  if (item) item.cantidad++;
+  else carrito.push({ ...cafe, cantidad: 1 });
   localStorage.setItem("carrito", JSON.stringify(carrito));
   Toastify({
     text: `${cafe.nombre} agregado al carrito`,
